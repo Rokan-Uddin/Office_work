@@ -9,17 +9,13 @@ import java.io.IOException;
 public class EmailController {
 
     @Autowired
-    private FileService fileService;
-
-    @Autowired
     private EmailService emailService;
 
     @GetMapping("/send-email")
     public String sendEmail() throws IOException, MessagingException {
         String text = "This is the content of the text file.";
-        File attachment = fileService.createAndWriteToFile(text);
-        
-        emailService.sendEmailWithAttachment("recipient@example.com", "Subject", "Email body", attachment);
+
+        emailService.sendEmailWithAttachment("recipient@example.com", "Subject", text);
 
         return "Email sent with attachment.";
     }

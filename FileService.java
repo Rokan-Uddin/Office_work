@@ -1,17 +1,14 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 @Service
 public class FileService {
 
-    public File createAndWriteToFile(String text) throws IOException {
-        File file = new File("example.txt");
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(text);
-        }
-        return file;
+    public byte[] createFileContent(String text) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byteArrayOutputStream.write(text.getBytes());
+        return byteArrayOutputStream.toByteArray();
     }
 }
